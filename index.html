@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cần Thơ Pop Map - Khám Phá Địa Điểm Du Lịch</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER NAVIGATION (Tích hợp bộ chọn ngôn ngữ VI - EN - 中文) -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+            <!-- Logo sát trái -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('locations')">
+                <div class="w-10 h-10 bg-gradient-to-tr from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white font-bold shadow-md shadow-orange-200">
+                    <i class="fa-solid fa-location-dot text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-slate-900 text-lg leading-tight tracking-tight">Cần Thơ Pop Map</h1>
+                    <p id="header-tagline" class="text-xs text-amber-600 font-medium">Chạm & Đi • Thông tin thực tế</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <!-- Navigation Tabs -->
+                <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-100 p-1 rounded-xl text-xs sm:text-sm font-semibold">
+                    <button id="nav-tab-locations" onclick="switchTab('locations')" class="px-3 sm:px-4 py-2 rounded-lg bg-amber-500 text-white shadow-md transition-all">
+                        <i class="fa-solid fa-map-pin mr-1.5"></i><span>Địa Điểm</span>
+                    </button>
+                    <button id="nav-tab-itinerary" onclick="switchTab('itinerary')" class="px-3 sm:px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-200/60 transition-all">
+                        <i class="fa-solid fa-route mr-1.5 text-orange-500"></i><span>Lịch Trình Mẫu</span>
+                    </button>
+                    <button id="nav-tab-about" onclick="switchTab('about')" class="px-3 sm:px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-200/60 transition-all">
+                        <i class="fa-solid fa-circle-info mr-1.5 text-blue-500"></i><span>Về Dự Án</span>
+                    </button>
+                </nav>
+
+                <!-- NÚT CHUYỂN ĐỔI NGÔN NGỮ (VI - EN - 中文) -->
+                <div class="flex items-center space-x-1 bg-slate-100 p-1 rounded-xl text-xs font-bold border border-slate-200">
+                    <button onclick="setLanguage('vi')" id="lang-btn-vi" class="px-2.5 py-1.5 rounded-lg bg-amber-500 text-white shadow-sm transition">VI</button>
+                    <button onclick="setLanguage('en')" id="lang-btn-en" class="px-2.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 transition">EN</button>
+                    <button onclick="setLanguage('zh')" id="lang-btn-zh" class="px-2.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 transition">中文</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-16 flex-grow w-full">
+
+        <!-- TAB 1: DANH SÁCH ĐỊA ĐIỂM -->
+        <section id="tab-locations" class="space-y-6">
+            <!-- Thanh tìm kiếm & Lọc danh mục -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                <div class="relative flex-grow max-w-lg">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="search-input" onkeyup="filterLocations()" placeholder="Tìm tên địa điểm (chợ nổi, cồn sơn, đền thờ...)" 
+                        class="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition">
+                </div>
+
+                <div class="flex space-x-2 overflow-x-auto no-scrollbar py-1 text-xs">
+                    <button id="cat-btn-all" onclick="filterCategory('All')" class="cat-btn active bg-slate-900 text-white font-medium px-4 py-2 rounded-xl whitespace-nowrap shadow-sm">Tất cả</button>
+                    <button id="cat-btn-culture" onclick="filterCategory('Văn hóa - Di tích')" class="cat-btn bg-white border border-slate-200 text-slate-600 font-medium px-4 py-2 rounded-xl whitespace-nowrap hover:bg-slate-50">Di tích & Văn hóa</button>
+                    <button id="cat-btn-food" onclick="filterCategory('Sông nước - Ẩm thực')" class="cat-btn bg-white border border-slate-200 text-slate-600 font-medium px-4 py-2 rounded-xl whitespace-nowrap hover:bg-slate-50">Sông nước & Ẩm thực</button>
+                    <button id="cat-btn-nature" onclick="filterCategory('Cộng đồng - Sinh thái')" class="cat-btn bg-white border border-slate-200 text-slate-600 font-medium px-4 py-2 rounded-xl whitespace-nowrap hover:bg-slate-50">Cộng đồng & Sinh thái</button>
+                </div>
+            </div>
+
+            <!-- Grid Danh sách Địa Điểm (3 cột trên PC) -->
+            <div id="locations-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- JavaScript sẽ render danh sách địa điểm vào đây -->
+            </div>
+        </section>
+
+        <!-- TAB 2: LỊCH TRÌNH MẪU -->
+        <section id="tab-itinerary" class="hidden space-y-6">
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-sm text-amber-900 flex items-start space-x-3">
+                <i class="fa-solid fa-lightbulb text-amber-600 text-lg mt-0.5"></i>
+                <p id="itinerary-tip-text">Các lịch trình mẫu đã được nhóm tối ưu theo lộ trình di chuyển thực tế tại Cần Thơ, giúp tiết kiệm tối đa thời gian di chuyển cho du khách tự túc.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="itinerary-list">
+                <!-- JavaScript sẽ render lịch trình mẫu vào đây -->
+            </div>
+        </section>
+
+        <!-- TAB 3: GIỚI THIỆU DỰ ÁN & MIỄN TRỪ TÁC NHIỆM -->
+        <section id="tab-about" class="hidden space-y-6 max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+                <h3 id="about-title" class="font-bold text-slate-900 text-lg border-b border-slate-100 pb-3 flex items-center">
+                    <i class="fa-solid fa-bullseye text-amber-500 mr-2.5"></i>Mục Tiêu Sản Phẩm Cần Thơ Pop Map
+                </h3>
+                <p id="about-desc" class="text-slate-600 leading-relaxed text-sm">
+                    <strong>Cần Thơ Pop Map</strong> được xây dựng nhằm giải quyết nỗi đau lớn nhất của du khách tự túc: thông tin địa điểm không chính xác, hình ảnh quảng cáo khác xa thực tế và giờ mở cửa thay đổi đột ngột.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+                        <i class="fa-solid fa-camera text-amber-500 text-lg"></i>
+                        <h4 id="about-feat1-title" class="font-bold text-slate-800 text-xs">Ảnh Camera Thường</h4>
+                        <p id="about-feat1-desc" class="text-slate-500 text-[11px]">Cam kết hình ảnh thực tế không qua chỉnh sửa.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+                        <i class="fa-solid fa-clock text-emerald-500 text-lg"></i>
+                        <h4 id="about-feat2-title" class="font-bold text-slate-800 text-xs">Cảnh Báo Thời Gian Trực</h4>
+                        <p id="about-feat2-desc" class="text-slate-500 text-[11px]">Cảnh báo trạng thái Mở/Đóng cửa tức thời.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+                        <i class="fa-solid fa-map-location-dot text-blue-500 text-lg"></i>
+                        <h4 id="about-feat3-title" class="font-bold text-slate-800 text-xs">Chỉ Đường 1-Chạm</h4>
+                        <p id="about-feat3-desc" class="text-slate-500 text-[11px]">Mở ngay ứng dụng Google Maps chính xác.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-100 rounded-2xl p-5 border border-slate-200 space-y-2 text-xs text-slate-600">
+                <h4 id="disclaimer-title" class="font-bold text-slate-800 flex items-center text-sm">
+                    <i class="fa-solid fa-shield-halved text-amber-600 mr-2"></i>Tuyên bố miễn trừ trách nhiệm
+                </h4>
+                <p id="disclaimer-desc" class="leading-relaxed">
+                    Cần Thơ Pop Map đóng vai trò là kênh tổng hợp thông tin tham khảo cộng đồng. Dữ liệu địa điểm được nhóm khảo sát và ghi nhận thời điểm cập nhật rõ ràng. Nhóm không chịu trách nhiệm pháp lý nếu cơ sở kinh doanh tự ý thay đổi khung giờ hoạt động hoặc dịch vụ ngoài thời điểm kiểm định.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL CHI TIẾT ĐỊA ĐIỂM -->
+    <div id="location-modal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-all">
+        <div class="bg-white w-full max-w-3xl rounded-3xl max-h-[92vh] overflow-y-auto p-6 space-y-5 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            
+            <!-- Header Modal -->
+            <div class="flex justify-between items-start border-b border-slate-100 pb-3">
+                <div>
+                    <span id="modal-category" class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full"></span>
+                    <h2 id="modal-title" class="text-2xl font-extrabold text-slate-900 mt-2"></h2>
+                    <p id="modal-address" class="text-xs text-slate-500 flex items-center mt-1">
+                        <i class="fa-solid fa-location-dot text-amber-500 mr-1.5"></i><span></span>
+                    </p>
+                </div>
+                <button onclick="closeModal()" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- SLIDER HÌNH ẢNH -->
+            <div class="relative rounded-2xl overflow-hidden group bg-slate-950 h-72 sm:h-96 shadow-inner">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-cover transition duration-300">
+                
+                <button id="slider-prev-btn" onclick="prevSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/80 text-white rounded-full flex items-center justify-center backdrop-blur-md transition shadow-md">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                
+                <button id="slider-next-btn" onclick="nextSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/80 text-white rounded-full flex items-center justify-center backdrop-blur-md transition shadow-md">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <div class="absolute top-3 left-3 bg-black/60 text-white text-xs px-3 py-1 rounded-lg backdrop-blur-md font-medium">
+                    <i class="fa-solid fa-camera mr-1.5"></i><span id="modal-lbl-real-photo">Ảnh thực tế</span> (<span id="modal-img-counter">1/1</span>)
+                </div>
+
+                <div id="modal-slider-dots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1.5"></div>
+            </div>
+
+            <!-- Khung trạng thái Mở/Đóng cửa -->
+            <div id="modal-status-box" class="p-4 rounded-xl border flex items-center justify-between text-xs sm:text-sm font-semibold">
+                <div class="flex items-center space-x-2.5">
+                    <span id="modal-status-dot" class="w-3 h-3 rounded-full"></span>
+                    <span id="modal-status-text"></span>
+                </div>
+                <span id="modal-open-hours" class="text-slate-500 font-normal"></span>
+            </div>
+
+            <!-- Lưới thông tin Giá vé & Kiểm định -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                    <span id="modal-lbl-ticket" class="text-slate-400 block text-xs mb-1">Giá vé / Chi phí tham khảo</span>
+                    <strong id="modal-ticket" class="text-slate-800"></strong>
+                </div>
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                    <span id="modal-lbl-updated" class="text-slate-400 block text-xs mb-1">Thời điểm kiểm định dữ liệu</span>
+                    <strong id="modal-updated" class="text-slate-800"></strong>
+                </div>
+            </div>
+
+            <!-- Nội dung mô tả chi tiết -->
+            <div class="space-y-1.5">
+                <h4 id="modal-lbl-desc-header" class="text-xs sm:text-sm font-bold text-slate-800">Mô tả thực tế & Kinh nghiệm chuyến đi:</h4>
+                <p id="modal-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100"></p>
+            </div>
+
+            <!-- Nguồn thông tin xác minh -->
+            <p class="text-xs text-slate-400 flex items-center">
+                <i class="fa-solid fa-link mr-1.5"></i><span id="modal-lbl-source" class="mr-1">Nguồn xác minh:</span> <span id="modal-source" class="text-slate-600 font-medium"></span>
+            </p>
+
+            <!-- Nút bấm chỉ đường Google Maps -->
+            <a id="modal-gmaps-link" href="#" target="_blank" 
+                class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl flex items-center justify-center space-x-2 shadow-lg shadow-orange-200 transition">
+                <i class="fa-solid fa-diamond-turn-right text-lg"></i>
+                <span id="modal-lbl-gmaps-btn" class="text-sm">Mở Chỉ Đường Google Maps</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- NHÚNG CÁC TỆP JAVASCRIPT -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
