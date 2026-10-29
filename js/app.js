@@ -1,7 +1,57 @@
-// BIẾN TOÀN CỤC QUẢN LÝ NGÔN NGỮ VÀ SLIDER ẢNH
+// BIẾN TOÀN CỤC QUẢN LÝ NGÔN NGỮ, SLIDER ẢNH VÀ LỊCH TRÌNH CÁ NHÂN
 let currentLang = 'vi';
 let currentImages = [];
 let currentImageIndex = 0;
+let userSelectedLocationIds = []; // Mảng lưu các địa điểm khách đã chọn
+
+// BỘ TỪ ĐIỂN ĐA NGÔN NGỮ CHO KHUNG TỰ CHỌN LỊCH TRÌNH
+const plannerText = {
+    vi: {
+        badge: "Lịch Trình Tự Chọn Cá Nhân",
+        titlePrefix: "Lộ Trình Đã Thiết Kế",
+        editBtn: "Chỉnh sửa",
+        openHoursLabel: "Khung giờ mở cửa",
+        placesCount: "địa điểm",
+        modalTitle: "Tự Chọn Địa Điểm Muốn Ghé Thăm",
+        modalDesc: "Tích chọn các điểm đến, hệ thống sẽ tự sắp xếp theo mốc thời gian mở cửa",
+        selectedPrefix: "Đã chọn:",
+        selectedSuffix: "địa điểm",
+        cancelBtn: "Hủy",
+        createBtn: "Tạo Lịch Trình",
+        btnMain: "Tự Chọn Địa Điểm",
+        alertSelect: "Vui lòng chọn ít nhất 1 địa điểm để tạo lịch trình!"
+    },
+    en: {
+        badge: "Custom Itinerary",
+        titlePrefix: "Designed Itinerary",
+        editBtn: "Edit Selection",
+        openHoursLabel: "Opening hours",
+        placesCount: "places",
+        modalTitle: "Select Places You Want To Visit",
+        modalDesc: "Select destinations and the system will automatically arrange them chronologically",
+        selectedPrefix: "Selected:",
+        selectedSuffix: "places",
+        cancelBtn: "Cancel",
+        createBtn: "Generate Itinerary",
+        btnMain: "Custom Planner",
+        alertSelect: "Please select at least 1 place to generate an itinerary!"
+    },
+    zh: {
+        badge: "个人自定义行程",
+        titlePrefix: "设计的行程",
+        editBtn: "编辑选择",
+        openHoursLabel: "营业时间",
+        placesCount: "个景点",
+        modalTitle: "选择您想游览的景点",
+        modalDesc: "勾选目的地，系统将自动按开放时间顺序排列",
+        selectedPrefix: "已选择:",
+        selectedSuffix: "个景点",
+        cancelBtn: "取消",
+        createBtn: "生成行程",
+        btnMain: "自定义行程",
+        alertSelect: "请至少选择 1 个地点以生成行程！"
+    }
+};
 
 // Hàm bổ trợ lấy văn bản theo ngôn ngữ đang chọn
 function getLangText(obj) {
@@ -44,7 +94,7 @@ function setLanguage(lang) {
     // Cập nhật các văn bản tĩnh trên giao diện HTML từ uiText
     if (typeof uiText !== 'undefined' && uiText[currentLang]) {
         const t = uiText[currentLang];
-        
+
         const tagline = document.getElementById('header-tagline');
         if (tagline) tagline.innerText = t.headerTagline;
 
@@ -121,9 +171,32 @@ function setLanguage(lang) {
         if (lblGmaps) lblGmaps.innerText = t.gmapsBtn;
     }
 
-    // Render lại toàn bộ dữ liệu theo ngôn ngữ mới
+    // Cập nhật văn bản tĩnh trong Modal Tự Chọn Lịch Trình
+    const pt = plannerText[currentLang] || plannerText.vi;
+    const modalTitleEl = document.getElementById('planner-modal-title');
+    if (modalTitleEl) modalTitleEl.innerHTML = `<i class="fa-solid fa-route text-amber-500 mr-2"></i>${pt.modalTitle}`;
+    
+    const modalDescEl = document.getElementById('planner-modal-desc');
+    if (modalDescEl) modalDescEl.innerText = pt.modalDesc;
+
+    const modalCancelBtn = document.getElementById('planner-modal-cancel-btn');
+    if (modalCancelBtn) modalCancelBtn.innerText = pt.cancelBtn;
+
+    const modalCreateBtn = document.getElementById('planner-modal-create-btn');
+    if (modalCreateBtn) modalCreateBtn.querySelector('span').innerText = pt.createBtn;
+
+    const mainBtnText = document.getElementById('planner-main-btn-text');
+    if (mainBtnText) mainBtnText.innerText = pt.btnMain;
+
+    // Render lại toàn bộ dữ liệu địa điểm & lịch trình mẫu
     renderLocations(locations);
     renderItineraries(itineraries);
+
+    // Nếu thẻ lịch trình tự chọn đang hiển thị -> Render lại ngôn ngữ mới ngay
+    const customResult = document.getElementById('custom-itinerary-result');
+    if (customResult && !customResult.classList.contains('hidden') && userSelectedLocationIds.length > 0) {
+        renderCustomItinerary();
+    }
 }
 
 // Render danh sách địa điểm dạng Lưới (Grid)
@@ -152,7 +225,7 @@ function renderLocations(data) {
         const itemCategory = getLangText(item.category);
         const itemAddress = getLangText(item.address);
 
-        const statusBadge = isOpen 
+        const statusBadge = isOpen
             ? `<span class="bg-emerald-500/90 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center shadow-md"><span class="w-2 h-2 bg-white rounded-full mr-1.5 animate-pulse"></span>${t.openStatus}</span>`
             : `<span class="bg-rose-500/90 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center shadow-md"><span class="w-2 h-2 bg-white rounded-full mr-1.5"></span>${t.closeStatus}</span>`;
 
@@ -305,6 +378,7 @@ function openModal(id) {
     document.getElementById('modal-desc').innerText = getLangText(item.desc);
     document.getElementById('modal-source').innerText = item.source;
     document.getElementById('modal-gmaps-link').href = item.gmaps;
+    document.getElementById('modal-booking-link').href = item.booking || '#';
 
     const statusBox = document.getElementById('modal-status-box');
     const statusDot = document.getElementById('modal-status-dot');
@@ -380,4 +454,151 @@ function switchTab(tab) {
         activeBtn.classList.add('bg-amber-500', 'text-white', 'shadow-md');
         activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
     }
+}
+
+// ==========================================
+// LOGIC MODAL TỰ CHỌN LỊCH TRÌNH CÁ NHÂN
+// ==========================================
+
+function openCustomPlannerModal() {
+    renderCustomPlannerOptions();
+    const modal = document.getElementById('custom-planner-modal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeCustomPlannerModal() {
+    const modal = document.getElementById('custom-planner-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function updateSelectedCount() {
+    const checkboxes = document.querySelectorAll('.custom-place-checkbox:checked');
+    const pt = plannerText[currentLang] || plannerText.vi;
+    const badge = document.getElementById('selected-count-badge');
+    if (badge) {
+        badge.innerText = `${pt.selectedPrefix} ${checkboxes.length} ${pt.selectedSuffix}`;
+    }
+}
+
+// Render danh sách địa điểm dạng Checkbox (Tự đánh dấu tích lại địa điểm đã chọn trước đó)
+function renderCustomPlannerOptions() {
+    const container = document.getElementById('custom-planner-list');
+    if (!container || typeof locations === 'undefined') return;
+
+    container.innerHTML = locations.map(item => {
+        const itemName = getLangText(item.name);
+        const itemCat = getLangText(item.category);
+        const openTime = `${item.openHour < 10 ? '0' + item.openHour : item.openHour}:00`;
+        const closeTime = `${item.closeHour < 10 ? '0' + item.closeHour : item.closeHour}:00`;
+        const isChecked = userSelectedLocationIds.includes(item.id) ? 'checked' : '';
+
+        return `
+            <label class="flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-amber-50 hover:border-amber-300 transition cursor-pointer group">
+                <div class="flex items-center space-x-3 truncate">
+                    <input type="checkbox" value="${item.id}" ${isChecked} onchange="updateSelectedCount()" class="custom-place-checkbox w-4 h-4 text-amber-500 rounded border-slate-300 focus:ring-amber-400">
+                    <div class="truncate">
+                        <span class="font-bold text-slate-800 text-xs block group-hover:text-amber-700 transition truncate">${itemName}</span>
+                        <span class="text-[10px] text-slate-400 block">${itemCat}</span>
+                    </div>
+                </div>
+                <span class="text-[11px] font-semibold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded whitespace-nowrap ml-2">
+                    <i class="fa-regular fa-clock mr-1"></i>${openTime} - ${closeTime}
+                </span>
+            </label>
+        `;
+    }).join('');
+
+    updateSelectedCount();
+}
+
+// Lấy danh sách điểm được tích chọn và render thẻ kết quả
+function generateCustomItinerary() {
+    const checkboxes = document.querySelectorAll('.custom-place-checkbox:checked');
+    const pt = plannerText[currentLang] || plannerText.vi;
+
+    if (checkboxes.length === 0) {
+        alert(pt.alertSelect);
+        return;
+    }
+
+    // Cập nhật danh sách ID được chọn vào biến toàn cục
+    userSelectedLocationIds = Array.from(checkboxes).map(cb => parseInt(cb.value));
+
+    renderCustomItinerary();
+    closeCustomPlannerModal();
+
+    const resultContainer = document.getElementById('custom-itinerary-result');
+    if (resultContainer) {
+        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+// Render khung Lịch Trình Cá Nhân theo ngôn ngữ đang chọn
+function renderCustomItinerary() {
+    const resultContainer = document.getElementById('custom-itinerary-result');
+    if (!resultContainer || userSelectedLocationIds.length === 0) return;
+
+    const pt = plannerText[currentLang] || plannerText.vi;
+
+    // Sắp xếp địa điểm theo giờ mở cửa từ sáng tới tối
+    const selectedPlaces = locations
+        .filter(l => userSelectedLocationIds.includes(l.id))
+        .sort((a, b) => a.openHour - b.openHour);
+
+    const stepsHTML = selectedPlaces.map(p => {
+        const pName = getLangText(p.name);
+        const pAddress = getLangText(p.address);
+        const pDesc = getLangText(p.desc);
+        const openTime = `${p.openHour < 10 ? '0' + p.openHour : p.openHour}:00`;
+        const closeTime = `${p.closeHour < 10 ? '0' + p.closeHour : p.closeHour}:00`;
+
+        return `
+            <div class="flex items-start space-x-3 text-xs relative pl-4 border-l-2 border-amber-400 pb-4 last:pb-0">
+                <div class="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-amber-500 ring-4 ring-white"></div>
+                <div>
+                    <span class="font-bold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded text-[11px]">
+                        ${pt.openHoursLabel}: ${openTime} - ${closeTime}
+                    </span>
+                    <h5 class="font-bold text-slate-900 text-sm mt-1.5">${pName}</h5>
+                    <p class="text-slate-500 text-[11px] mt-0.5"><i class="fa-solid fa-location-dot text-amber-500 mr-1"></i>${pAddress}</p>
+                    <p class="text-slate-600 text-xs mt-1.5 leading-relaxed">${pDesc}</p>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    resultContainer.innerHTML = `
+        <div class="bg-amber-50/70 border-2 border-amber-400 rounded-2xl p-5 shadow-md space-y-4 animate-in fade-in zoom-in duration-300">
+            <div class="flex justify-between items-center border-b border-amber-200 pb-3">
+                <div>
+                    <span class="text-[11px] font-bold text-amber-900 bg-amber-200/80 px-2.5 py-1 rounded-md">
+                        <i class="fa-solid fa-user-check mr-1"></i>${pt.badge}
+                    </span>
+                    <h4 class="font-bold text-slate-900 text-base sm:text-lg mt-2">${pt.titlePrefix} (${selectedPlaces.length} ${pt.placesCount})</h4>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <!-- NÚT CHỈNH SỬA BẰNG CÁCH MỞ LẠI MODAL -->
+                    <button onclick="openCustomPlannerModal()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center space-x-1">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span>${pt.editBtn}</span>
+                    </button>
+                    <!-- NÚT ĐÓNG LỊCH TRÌNH -->
+                    <button onclick="document.getElementById('custom-itinerary-result').classList.add('hidden')" class="w-8 h-8 rounded-full bg-amber-200/50 hover:bg-amber-200 text-amber-800 flex items-center justify-center transition">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="pt-2">
+                ${stepsHTML}
+            </div>
+        </div>
+    `;
+
+    resultContainer.classList.remove('hidden');
 }

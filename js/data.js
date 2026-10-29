@@ -99,20 +99,20 @@ const uiText = {
 const locations = [
     {
         id: 1,
-        name: { 
-            vi: "Bến Ninh Kiều & Cầu Tình Yêu", 
-            en: "Ninh Kieu Wharf & Love Bridge", 
-            zh: "宁桥码头与情人桥" 
+        name: {
+            vi: "Bến Ninh Kiều & Cầu Tình Yêu",
+            en: "Ninh Kieu Wharf & Love Bridge",
+            zh: "宁桥码头与情人桥"
         },
-        category: { 
-            vi: "Văn hóa - Di tích", 
-            en: "Culture & Heritage", 
-            zh: "文化与古迹" 
+        category: {
+            vi: "Văn hóa - Di tích",
+            en: "Culture & Heritage",
+            zh: "文化与古迹"
         },
-        address: { 
-            vi: "Đường Hai Bà Trưng, P. Tân An, Q. Ninh Kiều, Cần Thơ", 
-            en: "Hai Ba Trung St, Tan An, Ninh Kieu, Can Tho", 
-            zh: "芹苴市宁桥郡新安坊二征夫人路" 
+        address: {
+            vi: "Đường Hai Bà Trưng, P. Tân An, Q. Ninh Kiều, Cần Thơ",
+            en: "Hai Ba Trung St, Tan An, Ninh Kieu, Can Tho",
+            zh: "芹苴市宁桥郡新安坊二征夫人路"
         },
         images: [
             "images/ben-ninh-kieu/img1.jpg",
@@ -123,10 +123,11 @@ const locations = [
         ],
         openHour: 0,   // 00:00
         closeHour: 24, // Mở cả ngày
-        ticket: { 
-            vi: "Miễn phí tham quan", 
-            en: "Free entry", 
-            zh: "免费参观" 
+        booking: "https://zalo.me/********", // Hoặc link fanpage / hotline
+        ticket: {
+            vi: "Miễn phí tham quan",
+            en: "Free entry",
+            zh: "免费参观"
         },
         updated: "25/10/2026",
         source: "Cổng thông tin Du lịch Cần Thơ",
@@ -139,20 +140,20 @@ const locations = [
     },
     {
         id: 2,
-        name: { 
-            vi: "Chợ Nổi Cái Răng", 
-            en: "Cai Rang Floating Market", 
-            zh: "水上市场 (Cái Răng)" 
+        name: {
+            vi: "Chợ Nổi Cái Răng",
+            en: "Cai Rang Floating Market",
+            zh: "水上市场 (Cái Răng)"
         },
-        category: { 
-            vi: "Sông nước - Ẩm thực", 
-            en: "River & Culinary", 
-            zh: "水乡与美食" 
+        category: {
+            vi: "Sông nước - Ẩm thực",
+            en: "River & Culinary",
+            zh: "水乡与美食"
         },
-        address: { 
-            vi: "Sông Cần Thơ, P. Lê Bình, Q. Cái Răng, Cần Thơ", 
-            en: "Can Tho River, Le Binh, Cai Rang, Can Tho", 
-            zh: "芹苴市丐𪎽郡黎平坊芹苴河" 
+        address: {
+            vi: "Sông Cần Thơ, P. Lê Bình, Q. Cái Răng, Cần Thơ",
+            en: "Can Tho River, Le Binh, Cai Rang, Can Tho",
+            zh: "芹苴市丐𪎽郡黎平坊芹苴河"
         },
         images: [
             "images/cho-noi-cai-rang/img1.jpg",
@@ -163,10 +164,12 @@ const locations = [
         ],
         openHour: 5,  // 05:00 AM
         closeHour: 9,  // 09:00 AM
-        ticket: { 
-            vi: "Miễn phí (Thuê tàu 250k - 350k/chuyến)", 
-            en: "Free entry (Boat rental ~$10 - $14/trip)", 
-            zh: "免费（租船约 250k - 350k 越南盾/趟）" 
+        booking: "https://zalo.me/********", // Hoặc link fanpage / hotline
+
+        ticket: {
+            vi: "Miễn phí (Thuê tàu 250k - 350k/chuyến)",
+            en: "Free entry (Boat rental ~$10 - $14/trip)",
+            zh: "免费（租船约 250k - 350k 越南盾/趟）"
         },
         updated: "25/10/2026",
         source: "Khảo sát thực tế nhóm & Báo Cần Thơ",
@@ -179,20 +182,20 @@ const locations = [
     },
     {
         id: 3,
-        name: { 
-            vi: "Cồn Sơn", 
-            en: "Con Son Islet", 
-            zh: "山洲生态岛 (Cồn Sơn)" 
+        name: {
+            vi: "Cồn Sơn",
+            en: "Con Son Islet",
+            zh: "山洲生态岛 (Cồn Sơn)"
         },
-        category: { 
-            vi: "Cộng đồng - Sinh thái", 
-            en: "Ecology & Temple", 
-            zh: "生态与宗教" 
+        category: {
+            vi: "Cộng đồng - Sinh thái",
+            en: "Ecology & Temple",
+            zh: "生态与宗教"
         },
-        address: { 
-            vi: "Bến đò Cô Bắc, P. Bùi Hữu Nghĩa, Q. Bình Thủy, Cần Thơ", 
-            en: "Co Bac Boat Dock, Bui Huu Nghia, Binh Thuy, Can Tho", 
-            zh: "芹苴市平水郡裴 hữu 义坊姑北渡口" 
+        address: {
+            vi: "Bến đò Cô Bắc, P. Bùi Hữu Nghĩa, Q. Bình Thủy, Cần Thơ",
+            en: "Co Bac Boat Dock, Bui Huu Nghia, Binh Thuy, Can Tho",
+            zh: "芹苴市平水郡裴 hữu 义坊姑北渡口"
         },
         images: [
             "images/con-son/img1.jpg",
@@ -203,10 +206,12 @@ const locations = [
         ],
         openHour: 7,  // 07:00 AM
         closeHour: 17, // 17:00 PM
-        ticket: { 
-            vi: "~30.000 - 50.000 VNĐ/nhà (Vé đò ~10k-20k)", 
-            en: "~$1.2 - $2 / house (Ferry ~$0.4-$0.8)", 
-            zh: "约 30,000 - 50,000 越南盾/家（渡船约 10k-20k）" 
+        booking: "https://zalo.me/********", // Hoặc link fanpage / hotline
+
+        ticket: {
+            vi: "~30.000 - 50.000 VNĐ/nhà (Vé đò ~10k-20k)",
+            en: "~$1.2 - $2 / house (Ferry ~$0.4-$0.8)",
+            zh: "约 30,000 - 50,000 越南盾/家（渡船约 10k-20k）"
         },
         updated: "25/10/2026",
         source: "Khảo sát thực tế du lịch cộng đồng Cồn Sơn",
@@ -219,20 +224,20 @@ const locations = [
     },
     {
         id: 4,
-        name: { 
-            vi: "Làng du lịch Ông Đề", 
-            en: "Ong De Eco Village", 
-            zh: "翁提生态旅游村 (Ông Đề)" 
+        name: {
+            vi: "Làng du lịch Ông Đề",
+            en: "Ong De Eco Village",
+            zh: "翁提生态旅游村 (Ông Đề)"
         },
-        category: { 
-            vi: "Cộng đồng - Sinh thái", 
-            en: "Ecology & Temple", 
-            zh: "生态与宗教" 
+        category: {
+            vi: "Cộng đồng - Sinh thái",
+            en: "Ecology & Temple",
+            zh: "生态与宗教"
         },
-        address: { 
-            vi: "Ấp Mỹ Ái, xã Mỹ Khánh, H. Phong Điền, Cần Thơ", 
-            en: "My Ai Hamlet, My Khanh, Phong Dien, Can Tho", 
-            zh: "芹苴市丰田县美庆社美爱邑" 
+        address: {
+            vi: "Ấp Mỹ Ái, xã Mỹ Khánh, H. Phong Điền, Cần Thơ",
+            en: "My Ai Hamlet, My Khanh, Phong Dien, Can Tho",
+            zh: "芹苴市丰田县美庆社美爱邑"
         },
         images: [
             "images/lang-ong-de/img1.jpg",
@@ -243,10 +248,12 @@ const locations = [
         ],
         openHour: 7,  // 07:00 AM
         closeHour: 17, // 17:30 PM
-        ticket: { 
-            vi: "130.000 VNĐ / người lớn (Trẻ em: 50k - Miễn phí <1m2)", 
-            en: "130,000 VND / adult (Children: 50k - Free <1.2m)", 
-            zh: "成人 130,000 越南盾（儿童：50k - 1.2米以下免费）" 
+        booking: "https://zalo.me/********", // Hoặc link fanpage / hotline
+
+        ticket: {
+            vi: "130.000 VNĐ / người lớn (Trẻ em: 50k - Miễn phí <1m2)",
+            en: "130,000 VND / adult (Children: 50k - Free <1.2m)",
+            zh: "成人 130,000 越南盾（儿童：50k - 1.2米以下免费）"
         },
         updated: "25/10/2026",
         source: "Khảo sát thực tế Làng du lịch Ông Đề",
@@ -259,20 +266,20 @@ const locations = [
     },
     {
         id: 5,
-        name: { 
-            vi: "Đền thờ Vua Hùng", 
-            en: "Hung Kings Temple", 
-            zh: "雄王祖阙 (Đền thờ Vua Hùng)" 
+        name: {
+            vi: "Đền thờ Vua Hùng",
+            en: "Hung Kings Temple",
+            zh: "雄王祖阙 (Đền thờ Vua Hùng)"
         },
-        category: { 
-            vi: "Văn hóa - Di tích", 
-            en: "Culture & Heritage", 
-            zh: "文化与古迹" 
+        category: {
+            vi: "Văn hóa - Di tích",
+            en: "Culture & Heritage",
+            zh: "文化与古迹"
         },
-        address: { 
-            vi: "Đường Lê Lợi, Q. Bình Thủy, Cần Thơ", 
-            en: "Le Loi St, Binh Thuy, Can Tho", 
-            zh: "芹苴市平水郡黎利路" 
+        address: {
+            vi: "Đường Lê Lợi, Q. Bình Thủy, Cần Thơ",
+            en: "Le Loi St, Binh Thuy, Can Tho",
+            zh: "芹苴市平水郡黎利路"
         },
         images: [
             "images/den-vua-hung/img1.jpg",
@@ -283,10 +290,12 @@ const locations = [
         ],
         openHour: 7,  // 07:30 AM
         closeHour: 17, // 17:00 PM
-        ticket: { 
-            vi: "Miễn phí tham quan", 
-            en: "Free entry", 
-            zh: "免费参观" 
+        booking: "https://zalo.me/********", // Hoặc link fanpage / hotline
+
+        ticket: {
+            vi: "Miễn phí tham quan",
+            en: "Free entry",
+            zh: "免费参观"
         },
         updated: "25/10/2026",
         source: "Cổng thông tin Đền thờ Vua Hùng Cần Thơ",
@@ -302,64 +311,64 @@ const locations = [
 // DỮ LIỆU 6 LỊCH TRÌNH MẪU (Hỗ trợ 3 Ngôn ngữ)
 const itineraries = [
     {
-        title: { 
-            vi: "Lịch Trình 1: Khám Phá Văn Hóa Cần Thơ", 
-            en: "Itinerary 1: Cultural Discovery", 
-            zh: "行程一：芹苴文化深度游" 
+        title: {
+            vi: "Lịch Trình 1: Khám Phá Văn Hóa Cần Thơ",
+            en: "Itinerary 1: Cultural Discovery",
+            zh: "行程一：芹苴文化深度游"
         },
-        badge: { 
-            vi: "Lần đầu đến Cần Thơ", 
-            en: "First-time Visitors", 
-            zh: "初游芹苴推荐" 
+        badge: {
+            vi: "Lần đầu đến Cần Thơ",
+            en: "First-time Visitors",
+            zh: "初游芹苴推荐"
         },
-        time: { 
-            vi: "1 Ngày (06:00 - 22:00)", 
-            en: "1 Day (06:00 - 22:00)", 
-            zh: "1 日游 (06:00 - 22:00)" 
+        time: {
+            vi: "1 Ngày (06:00 - 22:00)",
+            en: "1 Day (06:00 - 22:00)",
+            zh: "1 日游 (06:00 - 22:00)"
         },
         steps: [
-            { 
-                time: "06:00 - 08:00", 
-                place: { vi: "Chợ nổi Cái Răng", en: "Cai Rang Floating Market", zh: "水上市场" }, 
-                detail: { vi: "Thưởng thức hủ tiếu ghe, cà phê sông nước và trải nghiệm nét văn hóa giao thương đặc trưng.", en: "Enjoy floating boat noodle soup, coffee, and unique river trade culture.", zh: "在船上品尝河粉与咖啡，体验独特的水上交易文化。" } 
+            {
+                time: "06:00 - 08:00",
+                place: { vi: "Chợ nổi Cái Răng", en: "Cai Rang Floating Market", zh: "水上市场" },
+                detail: { vi: "Thưởng thức hủ tiếu ghe, cà phê sông nước và trải nghiệm nét văn hóa giao thương đặc trưng.", en: "Enjoy floating boat noodle soup, coffee, and unique river trade culture.", zh: "在船上品尝河粉与咖啡，体验独特的水上交易文化。" }
             },
-            { 
-                time: "09:00 - 10:30", 
-                place: { vi: "Đền thờ Vua Hùng", en: "Hung Kings Temple", zh: "雄王祖阙" }, 
-                detail: { vi: "Tham quan công trình kiến trúc tâm linh hoành tráng, dâng hương tưởng niệm.", en: "Visit the grand spiritual architecture and offer incense.", zh: "参观宏伟的宗教建筑并焚香祭拜。" } 
+            {
+                time: "09:00 - 10:30",
+                place: { vi: "Đền thờ Vua Hùng", en: "Hung Kings Temple", zh: "雄王祖阙" },
+                detail: { vi: "Tham quan công trình kiến trúc tâm linh hoành tráng, dâng hương tưởng niệm.", en: "Visit the grand spiritual architecture and offer incense.", zh: "参观宏伟的宗教建筑并焚香祭拜。" }
             },
-            { 
-                time: "13:30 - 15:30", 
-                place: { vi: "Cồn Sơn", en: "Con Son Islet", zh: "山洲生态岛" }, 
-                detail: { vi: "Trải nghiệm du lịch cộng đồng, xem cá lóc bay và tự tay làm bánh dân gian.", en: "Experience community tourism, watch flying fish, and handcraft local cakes.", zh: "体验社区旅游，观看飞鱼并亲手制作传统糕点。" } 
+            {
+                time: "13:30 - 15:30",
+                place: { vi: "Cồn Sơn", en: "Con Son Islet", zh: "山洲生态岛" },
+                detail: { vi: "Trải nghiệm du lịch cộng đồng, xem cá lóc bay và tự tay làm bánh dân gian.", en: "Experience community tourism, watch flying fish, and handcraft local cakes.", zh: "体验社区旅游，观看飞鱼并亲手制作传统糕点。" }
             },
-            { 
-                time: "16:00 - 18:00", 
-                place: { vi: "Làng du lịch Ông Đề", en: "Ong De Eco Village", zh: "翁提生态村" }, 
-                detail: { vi: "Dạo mát không gian sinh thái và tham gia các trò chơi dân gian miền Tây.", en: "Stroll through eco-space and join fun Mekong folk games.", zh: "漫步生态空间，体验湄公河民间游戏。" } 
+            {
+                time: "16:00 - 18:00",
+                place: { vi: "Làng du lịch Ông Đề", en: "Ong De Eco Village", zh: "翁提生态村" },
+                detail: { vi: "Dạo mát không gian sinh thái và tham gia các trò chơi dân gian miền Tây.", en: "Stroll through eco-space and join fun Mekong folk games.", zh: "漫步生态空间，体验湄公河民间游戏。" }
             },
-            { 
-                time: "20:00 - 22:00", 
-                place: { vi: "Bến Ninh Kiều", en: "Ninh Kieu Wharf", zh: "宁桥码头" }, 
-                detail: { vi: "Đi dạo ngắm Cầu Tình Yêu, hóng gió sông Hậu và thưởng thức ẩm thực đêm.", en: "Walk along Love Bridge, enjoy Hau River breeze, and sample street food.", zh: "漫步情人桥，吹后江晚风，品尝夜市美食。" } 
+            {
+                time: "20:00 - 22:00",
+                place: { vi: "Bến Ninh Kiều", en: "Ninh Kieu Wharf", zh: "宁桥码头" },
+                detail: { vi: "Đi dạo ngắm Cầu Tình Yêu, hóng gió sông Hậu và thưởng thức ẩm thực đêm.", en: "Walk along Love Bridge, enjoy Hau River breeze, and sample street food.", zh: "漫步情人桥，吹后江晚风，品尝夜市美食。" }
             }
         ]
     },
     {
-        title: { 
-            vi: "Lịch Trình 2: Thiên Nhiên & Trải Nghiệm Miệt Vườn", 
-            en: "Itinerary 2: Nature & Orchard Experience", 
-            zh: "行程二：自然与果園生态游" 
+        title: {
+            vi: "Lịch Trình 2: Thiên Nhiên & Trải Nghiệm Miệt Vườn",
+            en: "Itinerary 2: Nature & Orchard Experience",
+            zh: "行程二：自然与果園生态游"
         },
-        badge: { 
-            vi: "Khám phá Miền Tây", 
-            en: "Mekong Explorer", 
-            zh: "探索湄公河" 
+        badge: {
+            vi: "Khám phá Miền Tây",
+            en: "Mekong Explorer",
+            zh: "探索湄公河"
         },
-        time: { 
-            vi: "1 Ngày (05:30 - 20:00)", 
-            en: "1 Day (05:30 - 20:00)", 
-            zh: "1 日游 (05:30 - 20:00)" 
+        time: {
+            vi: "1 Ngày (05:30 - 20:00)",
+            en: "1 Day (05:30 - 20:00)",
+            zh: "1 日游 (05:30 - 20:00)"
         },
         steps: [
             { time: "05:30 - 07:00", place: { vi: "Chợ nổi Cái Răng", en: "Cai Rang Floating Market", zh: "水上市场" }, detail: { vi: "Đón bình minh rực rỡ trên sông và ăn sáng hủ tiếu ghe nóng hổi.", en: "Catch river sunrise and eat hot floating noodle soup.", zh: "观赏江上日出，吃一碗热腾腾的水上河粉。" } },
@@ -371,20 +380,20 @@ const itineraries = [
         ]
     },
     {
-        title: { 
-            vi: "Lịch Trình 3: Ăn Chơi & Check-in Sống Ảo", 
-            en: "Itinerary 3: Food & Photo Check-in", 
-            zh: "行程三：美食与打卡之旅" 
+        title: {
+            vi: "Lịch Trình 3: Ăn Chơi & Check-in Sống Ảo",
+            en: "Itinerary 3: Food & Photo Check-in",
+            zh: "行程三：美食与打卡之旅"
         },
-        badge: { 
-            vi: "Nhóm bạn trẻ", 
-            en: "Youth Groups", 
-            zh: "青年群体推荐" 
+        badge: {
+            vi: "Nhóm bạn trẻ",
+            en: "Youth Groups",
+            zh: "青年群体推荐"
         },
-        time: { 
-            vi: "1 Ngày (05:00 - 20:00)", 
-            en: "1 Day (05:00 - 20:00)", 
-            zh: "1 日游 (05:00 - 20:00)" 
+        time: {
+            vi: "1 Ngày (05:00 - 20:00)",
+            en: "1 Day (05:00 - 20:00)",
+            zh: "1 日游 (05:00 - 20:00)"
         },
         steps: [
             { time: "05:00 - 07:00", place: { vi: "Chợ nổi Cái Răng", en: "Cai Rang Floating Market", zh: "水上市场" }, detail: { vi: "Săn khoảnh khắc bình minh trên sông và bắt trọn góc ảnh đậm chất miền Tây.", en: "Snap sunrise photos and capture iconic Mekong river vibes.", zh: "捕捉江上日出美景，拍摄绝佳照片。" } },
@@ -395,20 +404,20 @@ const itineraries = [
         ]
     },
     {
-        title: { 
-            vi: "Lịch Trình 4: Cần Thơ Trọn Vẹn (2N1Đ)", 
-            en: "Itinerary 4: Complete Can Tho (2D1N)", 
-            zh: "行程四：全景芹苴 (2天1夜)" 
+        title: {
+            vi: "Lịch Trình 4: Cần Thơ Trọn Vẹn (2N1Đ)",
+            en: "Itinerary 4: Complete Can Tho (2D1N)",
+            zh: "行程四：全景芹苴 (2天1夜)"
         },
-        badge: { 
-            vi: "Trải nghiệm đầy đủ", 
-            en: "Full Experience", 
-            zh: "全景体验" 
+        badge: {
+            vi: "Trải nghiệm đầy đủ",
+            en: "Full Experience",
+            zh: "全景体验"
         },
-        time: { 
-            vi: "2 Ngày 1 Đêm", 
-            en: "2 Days 1 Night", 
-            zh: "2 天 1 夜" 
+        time: {
+            vi: "2 Ngày 1 Đêm",
+            en: "2 Days 1 Night",
+            zh: "2 天 1 夜"
         },
         steps: [
             { time: "Ngày 1 - Sáng", place: { vi: "Chợ nổi Cái Răng", en: "Cai Rang Floating Market", zh: "水上市场" }, detail: { vi: "Trải nghiệm nét văn hóa sông nước đặc trưng nhất vùng ĐBSCL.", en: "Experience the most authentic river trade culture of the Delta.", zh: "体验湄公河三角洲最地道的水上交易文化。" } },
@@ -420,20 +429,20 @@ const itineraries = [
         ]
     },
     {
-        title: { 
-            vi: "Lịch Trình 5: Vui Chơi & Oanh Tạc Bạn Bè (2N1Đ)", 
-            en: "Itinerary 5: Fun & Friends Bonding (2D1N)", 
-            zh: "行程五：好友狂欢之旅 (2天1夜)" 
+        title: {
+            vi: "Lịch Trình 5: Vui Chơi & Oanh Tạc Bạn Bè (2N1Đ)",
+            en: "Itinerary 5: Fun & Friends Bonding (2D1N)",
+            zh: "行程五：好友狂欢之旅 (2天1夜)"
         },
-        badge: { 
-            vi: "Năng động & Vui nhộn", 
-            en: "Active & Fun", 
-            zh: "活力与乐趣" 
+        badge: {
+            vi: "Năng động & Vui nhộn",
+            en: "Active & Fun",
+            zh: "活力与乐趣"
         },
-        time: { 
-            vi: "2 Ngày 1 Đêm", 
-            en: "2 Days 1 Night", 
-            zh: "2 天 1 夜" 
+        time: {
+            vi: "2 Ngày 1 Đêm",
+            en: "2 Days 1 Night",
+            zh: "2 天 1 夜"
         },
         steps: [
             { time: "Ngày 1 - Sáng", place: { vi: "Cồn Sơn", en: "Con Son Islet", zh: "山洲生态岛" }, detail: { vi: "Trải nghiệm du lịch cộng đồng, ngắm cá lóc bay và làm bánh ngọt.", en: "Join community tours, watch flying fish, and make sweet snacks.", zh: "体验社区旅游，观赏飞鱼并制作甜点。" } },
@@ -445,20 +454,20 @@ const itineraries = [
         ]
     },
     {
-        title: { 
-            vi: "Lịch Trình 6: Thư Giãn & Chữa Lành Miệt Vườn (2N1Đ)", 
-            en: "Itinerary 6: Orchard Healing & Relaxation (2D1N)", 
-            zh: "行程六：果园疗愈与放松 (2天1夜)" 
+        title: {
+            vi: "Lịch Trình 6: Thư Giãn & Chữa Lành Miệt Vườn (2N1Đ)",
+            en: "Itinerary 6: Orchard Healing & Relaxation (2D1N)",
+            zh: "行程六：果园疗愈与放松 (2天1夜)"
         },
-        badge: { 
-            vi: "Nghỉ dưỡng & Chill", 
-            en: "Relax & Chill", 
-            zh: "休闲与疗愈" 
+        badge: {
+            vi: "Nghỉ dưỡng & Chill",
+            en: "Relax & Chill",
+            zh: "休闲与疗愈"
         },
-        time: { 
-            vi: "2 Ngày 1 Đêm", 
-            en: "2 Days 1 Night", 
-            zh: "2 天 1 夜" 
+        time: {
+            vi: "2 Ngày 1 Đêm",
+            en: "2 Days 1 Night",
+            zh: "2 天 1 夜"
         },
         steps: [
             { time: "Ngày 1 - Sáng", place: { vi: "Chợ nổi Cái Răng", en: "Cai Rang Floating Market", zh: "水上市场" }, detail: { vi: "Thưởng thức bữa sáng thong thả giữa không gian sông nước êm đềm.", en: "Enjoy a relaxed breakfast amidst peaceful river scenery.", zh: "在宁静的水乡风光中享用悠闲早餐。" } },
