@@ -123,7 +123,6 @@ const locations = [
         ],
         openHour: 0,   // 00:00
         closeHour: 24, // Mở cả ngày
-        booking: "https://zalo.me/********", // Hoặc link fanpage / hotline
         ticket: {
             vi: "Miễn phí tham quan",
             en: "Free entry",
@@ -164,7 +163,7 @@ const locations = [
         ],
         openHour: 5,  // 05:00 AM
         closeHour: 9,  // 09:00 AM
-        booking: "https://zalo.me/********", // Hoặc link fanpage / hotline
+        booking: "https://zalo.me/0783886677", // Hoặc link fanpage / hotline
 
         ticket: {
             vi: "Miễn phí (Thuê tàu 250k - 350k/chuyến)",
@@ -206,7 +205,7 @@ const locations = [
         ],
         openHour: 7,  // 07:00 AM
         closeHour: 17, // 17:00 PM
-        booking: "https://zalo.me/********", // Hoặc link fanpage / hotline
+        booking: "https://zalo.me/0919888670", // Hoặc link fanpage / hotline
 
         ticket: {
             vi: "~30.000 - 50.000 VNĐ/nhà (Vé đò ~10k-20k)",
@@ -248,7 +247,7 @@ const locations = [
         ],
         openHour: 7,  // 07:00 AM
         closeHour: 17, // 17:30 PM
-        booking: "https://zalo.me/********", // Hoặc link fanpage / hotline
+        booking: "https://zalo.me/0782918222", // Hoặc link fanpage / hotline
 
         ticket: {
             vi: "130.000 VNĐ / người lớn (Trẻ em: 50k - Miễn phí <1m2)",
@@ -290,7 +289,6 @@ const locations = [
         ],
         openHour: 7,  // 07:30 AM
         closeHour: 17, // 17:00 PM
-        booking: "https://zalo.me/********", // Hoặc link fanpage / hotline
 
         ticket: {
             vi: "Miễn phí tham quan",

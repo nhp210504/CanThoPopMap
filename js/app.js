@@ -79,14 +79,14 @@ function checkOpenStatus(openH, closeH) {
 function setLanguage(lang) {
     currentLang = lang;
 
-    // Cập nhật trạng thái hiển thị của bộ nút chọn ngôn ngữ
+    // Cập nhật trạng thái hiển thị của bộ nút chọn ngôn ngữ chuẩn màu xanh mòng két
     ['vi', 'en', 'zh'].forEach(l => {
         const btn = document.getElementById(`lang-btn-${l}`);
         if (btn) {
             if (l === lang) {
-                btn.className = "px-2.5 py-1.5 rounded-lg bg-amber-500 text-white shadow-sm transition font-bold";
+                btn.className = "px-2.5 py-1.5 rounded-lg bg-[#1EA282] text-white shadow-sm transition font-bold";
             } else {
-                btn.className = "px-2.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 transition font-bold";
+                btn.className = "px-2.5 py-1.5 rounded-lg text-emerald-100 hover:bg-white/10 transition font-bold";
             }
         }
     });
@@ -126,7 +126,7 @@ function setLanguage(lang) {
         if (itTip) itTip.innerText = t.itineraryTip;
 
         const abTitle = document.getElementById('about-title');
-        if (abTitle) abTitle.innerHTML = `<i class="fa-solid fa-bullseye text-amber-500 mr-2.5"></i>${t.aboutTitle}`;
+        if (abTitle) abTitle.innerHTML = `<i class="fa-solid fa-bullseye text-emerald-600 mr-2.5"></i>${t.aboutTitle}`;
 
         const abDesc = document.getElementById('about-desc');
         if (abDesc) abDesc.innerHTML = `<strong>Cần Thơ Pop Map</strong> ${t.aboutDesc.replace('Cần Thơ Pop Map ', '')}`;
@@ -147,7 +147,7 @@ function setLanguage(lang) {
         if (f3D) f3D.innerText = t.aboutFeat3Desc;
 
         const disT = document.getElementById('disclaimer-title');
-        if (disT) disT.innerHTML = `<i class="fa-solid fa-shield-halved text-amber-600 mr-2"></i>${t.disclaimerTitle}`;
+        if (disT) disT.innerHTML = `<i class="fa-solid fa-shield-halved text-emerald-700 mr-2"></i>${t.disclaimerTitle}`;
 
         const disD = document.getElementById('disclaimer-desc');
         if (disD) disD.innerText = t.disclaimerDesc;
@@ -174,8 +174,8 @@ function setLanguage(lang) {
     // Cập nhật văn bản tĩnh trong Modal Tự Chọn Lịch Trình
     const pt = plannerText[currentLang] || plannerText.vi;
     const modalTitleEl = document.getElementById('planner-modal-title');
-    if (modalTitleEl) modalTitleEl.innerHTML = `<i class="fa-solid fa-route text-amber-500 mr-2"></i>${pt.modalTitle}`;
-    
+    if (modalTitleEl) modalTitleEl.innerHTML = `<i class="fa-solid fa-route text-emerald-600 mr-2"></i>${pt.modalTitle}`;
+
     const modalDescEl = document.getElementById('planner-modal-desc');
     if (modalDescEl) modalDescEl.innerText = pt.modalDesc;
 
@@ -244,18 +244,18 @@ function renderLocations(data) {
                     </div>
                     ${imgCount > 1 ? `<span class="absolute top-3 right-24 bg-black/60 text-white text-[10px] px-2 py-1 rounded-md backdrop-blur-md"><i class="fa-solid fa-images mr-1"></i>${imgCount}</span>` : ''}
                     <div class="absolute bottom-3 left-3 right-3 text-white">
-                        <h3 class="font-bold text-lg leading-snug drop-shadow-md group-hover:text-amber-300 transition">${itemName}</h3>
+                        <h3 class="font-bold text-lg leading-snug drop-shadow-md group-hover:text-emerald-300 transition">${itemName}</h3>
                         <p class="text-xs text-slate-200 truncate flex items-center mt-1">
-                            <i class="fa-solid fa-location-dot text-amber-400 mr-1.5"></i>${itemAddress}
+                            <i class="fa-solid fa-location-dot text-emerald-400 mr-1.5"></i>${itemAddress}
                         </p>
                     </div>
                 </div>
             </div>
             <div class="p-4 bg-white flex items-center justify-between text-xs border-t border-slate-100">
                 <div class="text-slate-500 font-medium">
-                    <i class="fa-solid fa-clock text-amber-500 mr-1.5"></i>${item.openHour}:00 - ${item.closeHour}:00
+                    <i class="fa-solid fa-clock text-emerald-600 mr-1.5"></i>${item.openHour}:00 - ${item.closeHour}:00
                 </div>
-                <button class="text-amber-600 font-bold group-hover:translate-x-1 transition flex items-center space-x-1">
+                <button class="text-emerald-600 font-bold group-hover:translate-x-1 transition flex items-center space-x-1">
                     <span>${t.viewDetails}</span>
                     <i class="fa-solid fa-arrow-right text-[11px]"></i>
                 </button>
@@ -280,10 +280,10 @@ function renderItineraries(data) {
             const stepPlace = getLangText(s.place);
             const stepDetail = getLangText(s.detail);
             return `
-                <div class="flex items-start space-x-3 text-xs relative pl-4 border-l-2 border-amber-400 pb-3 last:pb-0">
-                    <div class="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-amber-500 ring-4 ring-white"></div>
+                <div class="flex items-start space-x-3 text-xs relative pl-4 border-l-2 border-emerald-400 pb-3 last:pb-0">
+                    <div class="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-emerald-600 ring-4 ring-white"></div>
                     <div>
-                        <span class="font-bold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded text-[11px]">${s.time}</span>
+                        <span class="font-bold text-emerald-900 bg-emerald-100/80 px-2 py-0.5 rounded text-[11px]">${s.time}</span>
                         <h5 class="font-bold text-slate-900 text-xs mt-1">${stepPlace}</h5>
                         <p class="text-slate-600 text-[12px] mt-0.5 leading-relaxed">${stepDetail}</p>
                     </div>
@@ -297,7 +297,7 @@ function renderItineraries(data) {
             <div>
                 <div class="flex justify-between items-start border-b border-slate-100 pb-3">
                     <div>
-                        <span class="text-[11px] font-bold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-md border border-orange-100">${itBadge}</span>
+                        <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">${itBadge}</span>
                         <h4 class="font-bold text-slate-900 text-base mt-2">${itTitle}</h4>
                     </div>
                     <span class="text-xs text-slate-500 font-medium bg-slate-100 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>${itTime}</span>
@@ -378,7 +378,17 @@ function openModal(id) {
     document.getElementById('modal-desc').innerText = getLangText(item.desc);
     document.getElementById('modal-source').innerText = item.source;
     document.getElementById('modal-gmaps-link').href = item.gmaps;
-    document.getElementById('modal-booking-link').href = item.booking || '#';
+
+    // TỰ ĐỘNG ẨN/HIỆN NÚT BOOKING
+    const bookingBtn = document.getElementById('modal-booking-link');
+    if (bookingBtn) {
+        if (item.booking && item.booking.trim() !== '' && item.booking !== '#') {
+            bookingBtn.href = item.booking;
+            bookingBtn.classList.remove('hidden'); // Địa điểm có link/sđt -> Hiện nút
+        } else {
+            bookingBtn.classList.add('hidden');    // Địa điểm miễn phí/không có booking -> Ẩn nút
+        }
+    }
 
     const statusBox = document.getElementById('modal-status-box');
     const statusDot = document.getElementById('modal-status-dot');
@@ -435,15 +445,14 @@ function filterCategory(cat) {
     }
 }
 
-// Chuyển Tab
+// CHUYỂN TAB ĐIỀU HƯỚNG (Cập nhật chuẩn màu xanh thương hiệu #1EA282)
 function switchTab(tab) {
     ['locations', 'itinerary', 'about'].forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         if (el) el.classList.add('hidden');
         const btn = document.getElementById(`nav-tab-${t}`);
         if (btn) {
-            btn.classList.remove('bg-amber-500', 'text-white', 'shadow-md');
-            btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+            btn.className = "px-3 sm:px-4 py-2 rounded-lg text-emerald-100 hover:bg-white/10 transition-all";
         }
     });
 
@@ -451,8 +460,7 @@ function switchTab(tab) {
     if (activeEl) activeEl.classList.remove('hidden');
     const activeBtn = document.getElementById(`nav-tab-${tab}`);
     if (activeBtn) {
-        activeBtn.classList.add('bg-amber-500', 'text-white', 'shadow-md');
-        activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+        activeBtn.className = "px-3 sm:px-4 py-2 rounded-lg bg-[#1EA282] text-white shadow-md transition-all font-bold";
     }
 }
 
@@ -486,7 +494,7 @@ function updateSelectedCount() {
     }
 }
 
-// Render danh sách địa điểm dạng Checkbox (Tự đánh dấu tích lại địa điểm đã chọn trước đó)
+// Render danh sách địa điểm dạng Checkbox
 function renderCustomPlannerOptions() {
     const container = document.getElementById('custom-planner-list');
     if (!container || typeof locations === 'undefined') return;
@@ -499,15 +507,15 @@ function renderCustomPlannerOptions() {
         const isChecked = userSelectedLocationIds.includes(item.id) ? 'checked' : '';
 
         return `
-            <label class="flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-amber-50 hover:border-amber-300 transition cursor-pointer group">
+            <label class="flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-emerald-50 hover:border-emerald-300 transition cursor-pointer group">
                 <div class="flex items-center space-x-3 truncate">
-                    <input type="checkbox" value="${item.id}" ${isChecked} onchange="updateSelectedCount()" class="custom-place-checkbox w-4 h-4 text-amber-500 rounded border-slate-300 focus:ring-amber-400">
+                    <input type="checkbox" value="${item.id}" ${isChecked} onchange="updateSelectedCount()" class="custom-place-checkbox w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-400">
                     <div class="truncate">
-                        <span class="font-bold text-slate-800 text-xs block group-hover:text-amber-700 transition truncate">${itemName}</span>
+                        <span class="font-bold text-slate-800 text-xs block group-hover:text-emerald-700 transition truncate">${itemName}</span>
                         <span class="text-[10px] text-slate-400 block">${itemCat}</span>
                     </div>
                 </div>
-                <span class="text-[11px] font-semibold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded whitespace-nowrap ml-2">
+                <span class="text-[11px] font-semibold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded whitespace-nowrap ml-2">
                     <i class="fa-regular fa-clock mr-1"></i>${openTime} - ${closeTime}
                 </span>
             </label>
@@ -559,14 +567,14 @@ function renderCustomItinerary() {
         const closeTime = `${p.closeHour < 10 ? '0' + p.closeHour : p.closeHour}:00`;
 
         return `
-            <div class="flex items-start space-x-3 text-xs relative pl-4 border-l-2 border-amber-400 pb-4 last:pb-0">
-                <div class="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-amber-500 ring-4 ring-white"></div>
+            <div class="flex items-start space-x-3 text-xs relative pl-4 border-l-2 border-emerald-400 pb-4 last:pb-0">
+                <div class="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-emerald-600 ring-4 ring-white"></div>
                 <div>
-                    <span class="font-bold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded text-[11px]">
+                    <span class="font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded text-[11px]">
                         ${pt.openHoursLabel}: ${openTime} - ${closeTime}
                     </span>
                     <h5 class="font-bold text-slate-900 text-sm mt-1.5">${pName}</h5>
-                    <p class="text-slate-500 text-[11px] mt-0.5"><i class="fa-solid fa-location-dot text-amber-500 mr-1"></i>${pAddress}</p>
+                    <p class="text-slate-500 text-[11px] mt-0.5"><i class="fa-solid fa-location-dot text-emerald-600 mr-1"></i>${pAddress}</p>
                     <p class="text-slate-600 text-xs mt-1.5 leading-relaxed">${pDesc}</p>
                 </div>
             </div>
@@ -574,22 +582,22 @@ function renderCustomItinerary() {
     }).join('');
 
     resultContainer.innerHTML = `
-        <div class="bg-amber-50/70 border-2 border-amber-400 rounded-2xl p-5 shadow-md space-y-4 animate-in fade-in zoom-in duration-300">
-            <div class="flex justify-between items-center border-b border-amber-200 pb-3">
+        <div class="bg-emerald-50/70 border-2 border-emerald-400 rounded-2xl p-5 shadow-md space-y-4 animate-in fade-in zoom-in duration-300">
+            <div class="flex justify-between items-center border-b border-emerald-200 pb-3">
                 <div>
-                    <span class="text-[11px] font-bold text-amber-900 bg-amber-200/80 px-2.5 py-1 rounded-md">
+                    <span class="text-[11px] font-bold text-emerald-900 bg-emerald-200/80 px-2.5 py-1 rounded-md">
                         <i class="fa-solid fa-user-check mr-1"></i>${pt.badge}
                     </span>
                     <h4 class="font-bold text-slate-900 text-base sm:text-lg mt-2">${pt.titlePrefix} (${selectedPlaces.length} ${pt.placesCount})</h4>
                 </div>
                 <div class="flex items-center space-x-2">
                     <!-- NÚT CHỈNH SỬA BẰNG CÁCH MỞ LẠI MODAL -->
-                    <button onclick="openCustomPlannerModal()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center space-x-1">
+                    <button onclick="openCustomPlannerModal()" class="px-3 py-1.5 bg-[#1EA282] hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center space-x-1">
                         <i class="fa-solid fa-pen-to-square"></i>
                         <span>${pt.editBtn}</span>
                     </button>
                     <!-- NÚT ĐÓNG LỊCH TRÌNH -->
-                    <button onclick="document.getElementById('custom-itinerary-result').classList.add('hidden')" class="w-8 h-8 rounded-full bg-amber-200/50 hover:bg-amber-200 text-amber-800 flex items-center justify-center transition">
+                    <button onclick="document.getElementById('custom-itinerary-result').classList.add('hidden')" class="w-8 h-8 rounded-full bg-emerald-200/50 hover:bg-emerald-200 text-emerald-800 flex items-center justify-center transition">
                         <i class="fa-solid fa-xmark text-base"></i>
                     </button>
                 </div>
@@ -601,4 +609,15 @@ function renderCustomItinerary() {
     `;
 
     resultContainer.classList.remove('hidden');
+}
+
+// Hàm chuyển tiếp từ màn hình chào mừng vào trang web chính
+function enterApp() {
+    const landing = document.getElementById('welcome-landing');
+    if (landing) {
+        landing.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+            landing.classList.add('hidden');
+        }, 700);
+    }
 }
